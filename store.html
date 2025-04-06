@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medicine Store</title>
+    <script src="https://cdn.jsdelivr.net/npm/web3@1.6.1/dist/web3.min.js"></script> <!-- Include Web3.js -->
+    <script src="store.js" defer></script>
+    <style>
+        body { 
+            font-family: 'Arial', sans-serif; 
+            margin: 20px; 
+            background-color: #f4f4f9; 
+        }
+        h1 {
+            color: #4CAF50;
+            text-align: center;
+        }
+        .medicine-list {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .medicine-item {
+            background-color: white;
+            width: 300px;
+            padding: 20px;
+            margin: 10px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #accountInfo, #balanceInfo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        #purchasedItems {
+            margin-top: 20px;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Medicine Store</h1>
+<div id="accountInfo">Not connected</div>
+<div id="balanceInfo">Balance: 0 ETH</div>
+<button id="connectButton">Connect Account</button> 
+
+<div class="medicine-list">
+    <div class="medicine-item">
+        <h3>Medicine A</h3>
+        <p>Price: 1 ETH</p>
+        <button onclick="purchaseMedicine('Medicine A')">Purchase</button>
+    </div>
+    <div class="medicine-item">
+        <h3>Medicine B</h3>
+        <p>Price: 1 ETH</p>
+        <button onclick="purchaseMedicine('Medicine B')">Purchase</button>
+    </div>
+    <div class="medicine-item">
+        <h3>Medicine C</h3>
+        <p>Price: 1 ETH</p>
+        <button onclick="purchaseMedicine('Medicine C')">Purchase</button>
+    </div>
+</div>
+
+<div id="purchasedItems">
+    <h2>Purchased Items</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Medicine Name</th>
+                <th>Quantity</th>
+            </tr>
+        </thead>
+        <tbody id="purchasedTableBody">
+            <!-- Purchased items will be populated here -->
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Patient Records</title>
+    <script src="finals.js" defer></script>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            margin: 20px; 
+            background-color: #f4f4f4; 
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        button { 
+            margin: 10px 0; 
+            padding: 10px 15px; 
+            background-color: #4CAF50; 
+            color: white; 
+            border: none; 
+            border-radius: 5px; 
+            cursor: pointer; 
+        }
+        button:hover { 
+            background-color: #45a049; 
+        }
+        input[type="text"] {
+            padding: 10px; 
+            margin: 10px 0; 
+            border-radius: 5px; 
+            border: 1px solid #ccc; 
+            width: calc(100% - 22px); 
+        }
+        table { 
+            border-collapse: collapse; 
+            width: 100%; 
+            margin-top: 20px; 
+            background-color: #fff; 
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        th, td { 
+            border: 1px solid #ccc; 
+            padding: 12px; 
+            text-align: left; 
+        }
+        th { 
+            background-color: #f2f2f2; 
+            color: #333; 
+        }
+        tr:hover {
+            background-color: #f9f9f9; 
+        }
+        .remove-button {
+            background-color: #ff4c4c;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .remove-button:hover {
+            background-color: #e03e3e;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Patient Records</h1>
+<button onclick="location.href='finals.html'">Home</button>
+
+<div style="text-align: center;">
+    <input type="text" id="removePatientName" placeholder="Enter Patient Name to Remove" />
+    <button id="removePatientButton">Remove Patient</button>
+</div>
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Height (cm)</th>
+            <th>Weight (kg)</th>
+            <th>Diagnosis</th>
+            <th>Treatment</th>
+            <th>Added By</th>
+            <th>Timestamp</th>
+            <th>Hash</th>
+            
+        </tr>
+    </thead>
+    <tbody id="patientRecordsTableBody">
+        <!-- Patient records will be populated here -->
+    </tbody>
+</table>
+
+<script>
+    // Load patient records from localStorage and display them in the table
+    function loadPatientRecords() {
+        const storedRecords = localStorage.getItem('patientRecords');
+        if (storedRecords) {
+            patientRecords = JSON.parse(storedRecords); // Parse stored records
+
+            const tableBody = document.getElementById('patientRecordsTableBody');
+            tableBody.innerHTML = ''; // Clear existing records
+
+            // Populate the table with all patient records
+            patientRecords.forEach((record, index) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${record.name}</td>
+                    <td>${record.age}</td>
+                    <td>${record.height}</td>
+                    <td>${record.weight}</td>
+                    <td>${record.diagnosis}</td>
+                    <td>${record.treatment}</td>
+                    <td>${record.addedBy}</td>
+                    <td>${record.timestamp}</td>
+                    <td>${record.hash}</td>
+                    <td><button class="remove-button" onclick="removeRecord(${index})">Remove</button></td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+    }
+
+    // Function to remove a patient record by name
+    function removeRecord(index) {
+        patientRecords.splice(index, 1); // Remove the record from the array
+        localStorage.setItem('patientRecords', JSON.stringify(patientRecords)); // Update localStorage
+        loadPatientRecords(); // Reload records to reflect changes
+    }
+
+    // Function to remove a patient record by name input
+    document.getElementById('removePatientButton')?.addEventListener('click', function () {
+        const nameToRemove = document.getElementById('removePatientName').value.trim();
+        patientRecords = patientRecords.filter(record => record.name !== nameToRemove);
+        localStorage.setItem('patientRecords', JSON.stringify(patientRecords)); // Update localStorage
+        loadPatientRecords(); // Reload records to reflect changes
+        document.getElementById('removePatientName').value = ''; // Clear input field
+    });
+
+    // Call loadPatientRecords when the page loads
+    window.onload = function () {
+        loadPatientRecords();
+    };
+</script>
+
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Record Management System</title>
+    <script src="finals.js" defer></script>
+    <style>
+        body { 
+            font-family: 'Arial', sans-serif; 
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        h1 {
+            margin: 0;
+        }
+        .intro {
+            text-align: center;
+            margin: 20px;
+        }
+        .intro p {
+            color: #555;
+        }
+        .container {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 30px;
+        }
+        .card {
+            background-color: white;
+            width: 30%;
+            padding: 20px;
+            box-shadow: 0px 0px 15px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            text-align: center;
+        }
+        .card h2 {
+            margin-bottom: 20px;
+        }
+        .card button {
+            padding: 15px 25px;
+            font-size: 16px;
+            margin: 10px 0;
+            color: white;
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .card button:hover {
+            background-color: #45a049;
+        }
+        .stats {
+            background-color: #e9f7ef;
+            padding: 20px;
+            text-align: center;
+            margin-top: 40px;
+        }
+        .stats div {
+            display: inline-block;
+            margin: 0 20px;
+        }
+        .footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Patient Record Management System</h1>
+    <p>Your one-stop solution for secure and efficient patient data management</p>
+</header>
+
+<div class="intro">
+    <p>Manage your medical records with ease and security using blockchain-based technology.</p>
+</div>
+
+<div class="container">
+    <div class="card">
+        <h2>Add a New Patient</h2>
+        <p>Enter patient details and securely add them to the blockchain</p>
+        <button id="addPatientButton" onclick="location.href='addPatients.html'">Add Patient</button>
+    </div>
+
+    <div class="card">
+        <h2>View Patient Records</h2>
+        <p>Search and view existing patient records securely stored in the system</p>
+        <button id="viewRecordsButton" onclick="location.href='viewPatients.html'">View Records</button>
+    </div>
+
+    <div class="card">
+        <h2>Store</h2>
+        <p>Purchaes Medicine and other peripherals</p>
+        <button id="storeButton" onclick="location.href='store.html'">Medicine Store</button>
+    </div>
+
+ 
+
+</div>
+
+<div class="stats">
+    <h2>Quick Stats</h2>
+    <div>
+        <h3>Total Patients</h3>
+        <p id="totalPatients">0</p> <!-- Dynamically populated -->
+    </div>
+    <div>
+        <h3>Last Patient Added</h3>
+        <p id="lastPatient">N/A</p> <!-- Dynamically populated -->
+    </div>
+    <div>
+        <h3>Total Records Created</h3>
+        <p id="totalRecords">0</p> <!-- Dynamically populated -->
+    </div>
+</div>
+
+<div class="footer">
+    <p>&copy; 2024 BloccMed. All rights reserved.</p>
+</div>
+
+<script>
+// JavaScript logic to dynamically populate the stats section
+document.addEventListener('DOMContentLoaded', function() {
+    const storedRecords = JSON.parse(localStorage.getItem('patientRecords')) || [];
+    document.getElementById('totalPatients').textContent = storedRecords.length;
+    document.getElementById('lastPatient').textContent = storedRecords.length ? storedRecords[storedRecords.length - 1].name : 'N/A';
+    document.getElementById('totalRecords').textContent = storedRecords.length;
+});
+</script>
+
+</body>
+</html>
